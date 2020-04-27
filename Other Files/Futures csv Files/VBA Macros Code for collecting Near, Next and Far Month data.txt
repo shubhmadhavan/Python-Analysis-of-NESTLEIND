@@ -1,0 +1,19 @@
+Sub EveryOtherRow()
+Dim rng As Range
+Dim InputRng As Range
+Dim OutRng As Range
+Dim xInterval As Integer
+xTitleId = "Please Select Interval"
+Set InputRng = Application.Selection
+Set InputRng = Application.InputBox("Range :", xTitleId, InputRng.Address, Type:=8)
+xInterval = Application.InputBox("Enter row interval", xTitleId, Type:=1)
+For i = 1 To InputRng.Rows.Count Step xInterval + 1
+    Set rng = InputRng.Cells(i, 1)
+    If OutRng Is Nothing Then
+        Set OutRng = rng
+    Else
+        Set OutRng = Application.Union(OutRng, rng)
+    End If
+Next
+OutRng.EntireRow.Select
+End Sub
